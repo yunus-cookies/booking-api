@@ -51,7 +51,24 @@ namespace Controllers
                 return NotFound();
             }
 
+            newBooking.Id = id;
+
             _bookingAction.Update(id, newBooking);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var booking = _bookingAction.Get(id);
+
+            if (booking == null)
+            {
+                return NotFound();
+            }
+
+            _bookingAction.Remove(id);
 
             return NoContent();
         }

@@ -9,6 +9,7 @@ namespace Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        // If already value then ignore [BsonIgnoreIfDefault]
         public string Id { get; set; }
 
         [BsonElement("Name")]
