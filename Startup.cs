@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Models;
 using Actions;
+using FluentValidation.AspNetCore;
+using Validation;
 
 namespace BookingService
 {
@@ -33,7 +35,11 @@ namespace BookingService
 
 
             services.AddControllersWithViews()
-                .AddNewtonsoftJson(options => options.UseMemberCasing());
+                .AddNewtonsoftJson(options => options.UseMemberCasing())
+                .AddFluentValidation(cfg => 
+                {
+                    cfg.RegisterValidatorsFromAssemblyContaining<BookingValidator>();
+                });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
